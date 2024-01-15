@@ -1,7 +1,7 @@
 """
 S.E. Schimmel - S.E.Schimmel@student.tudelft.nl
 Bachelor Final Project - WB3BEP-16 - TU Delft 2023-2024
-Depth from Defocus using a sharp and blurred image of the same scene
+Depth from Defocus using 2 differently blurred images of the same scene
 """
 
 import cv2
