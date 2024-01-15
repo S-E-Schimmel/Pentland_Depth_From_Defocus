@@ -9,8 +9,9 @@ import numpy as np
 
 # Known camera intrinsic values
 F=55 #mm (= Focal Length of Camera Lens)
-v0=59.06 #mm (Focus Distance = 80cm)
-f1=5.6 # (= f-number at which the lens aperture is set)
+v0=70.51 #mm (Focus Distance = 25cm)
+f1=16 # (= f-number at which the lens aperture is set)
+f2=10 # (= f-number at which the lens aperture is set)
 
 # Convert image to grayscale image (also changes image shape from height, width, channel to height, width only)
 def convert_to_grayscale(sharp_image,blurred_image):
@@ -68,15 +69,17 @@ def Select_Indices(ln_difference,average,n):
     return selected_indices
 
 # Estimate the Depth
-def Calculate_Depth(ln_difference,selected_indices):
+def Calculate_Depth(ln_difference,selected_indices, heigth, width):
     depth_sum=0 # Initialize counter variable at 0
     for i in range(len(selected_indices)):
         u_array=selected_indices[i][0] # Grab index from list
         v_array=selected_indices[i][1] # Grab index from list
-        u=np.abs(u_array-82)/164 # Determine u frequency
-        v=np.abs(v_array-91)/182 # Determine v frequency
+        u=np.abs(u_array-((heigth-1)/2))/heigth # Determine u frequency
+        v=np.abs(v_array-((width-1)/2))/width # Determine v frequency
         denominator = 2*np.pi**2*((u**2)+(v**2)) # Calculate denominator
-        sigma1 = np.sqrt((ln_difference[u_array][v_array]) / (denominator)) # Calculate radius of blur circle
+        ratio_of_sigmas = f2 / f1
+        sigma1_squared = 1 - (ratio_of_sigmas ** 2)
+        sigma1 = np.sqrt((ln_difference[u_array][v_array]) / (sigma1_squared * denominator)) # Calculate radius of blur circle
         depth = F * v0 / (v0 - F - sigma1 * f1) # Calculate Depth
         depth_sum+=depth # Add 1 to counter variable
     Average_Depth = depth_sum/len(selected_indices) # Determine final depth estimation
