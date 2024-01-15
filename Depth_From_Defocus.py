@@ -11,8 +11,8 @@ import time
 start_time = time.time()
 
 # Load the cropped image patches
-sharp_image = cv2.imread(r"S80CC.png")
-blurred_image = cv2.imread(r'B80CC.png')
+sharp_image = cv2.imread(r"CROPPED-PENTLAND-DFD/150CM/150CM-F16-1.jpg")
+blurred_image = cv2.imread(r'CROPPED-PENTLAND-DFD/150CM/150CM-F10-1.jpg')
 
 # Convert the image patches to grayscale
 gray_sharp, gray_blurred = Functions.convert_to_grayscale(sharp_image,blurred_image)
