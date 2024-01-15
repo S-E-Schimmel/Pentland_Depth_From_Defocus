@@ -11,8 +11,8 @@ import time
 start_time = time.time()
 
 # Load the cropped image patches
-sharp_image = cv2.imread(r"CROPPED-PENTLAND-DFD/50CM/50CM-F16-1.jpg")
-blurred_image = cv2.imread(r'CROPPED-PENTLAND-DFD/50CM/50CM-F10-1.jpg')
+sharp_image = cv2.imread(r"CROPPED-PENTLAND-DFD/150CM/150CM-F16-1.jpg")
+blurred_image = cv2.imread(r'CROPPED-PENTLAND-DFD/150CM/150CM-F10-1.jpg')
 
 height, width, channel = h, w, c = sharp_image.shape
 
